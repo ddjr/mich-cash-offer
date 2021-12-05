@@ -10,18 +10,13 @@ typeof b?b(this,a):a.format(this,Object.assign({},a,b))},toString:function(){var
 
   function maoRecalculate() {
     let arv = document.getElementById('arv').value;
-    let rehab = document.getElementById('rehab').value;
+    let rehab = document.querySelector('input[name="repair-costs"]:checked').value;
     arv = currency(arv);
-    rehab = currency(rehab);
+    let cashoffer = arv.multiply(.7).divide(100).intValue-rehab;
 
-    console.log(arv.Value);
-    console.log(rehab.value);
-
-    let cashoffer = arv.multiply(.7).divide(100).intValue-rehab.divide(100).intValue;
-    console.log(cashoffer);
-    if(!isNaN(rehab.intValue)){ document.getElementById('rehab').value = currency(rehab).format(); }
     if(!isNaN(arv.intValue)){ document.getElementById('arv').value = currency(arv).format(); }
     if(isNaN(cashoffer)){ return }
+    if (cashoffer < 1) { cashoffer = 0; }
     document.getElementById('cashOffer').innerHTML =  currency(cashoffer).format();
   }
 </script>
@@ -33,6 +28,12 @@ typeof b?b(this,a):a.format(this,Object.assign({},a,b))},toString:function(){var
 <!-- Compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <link href="https://d2xkituyopixp9.cloudfront.net/assets/application-50f3d6f0bdda9201e456be5a4f08e4606da52cf835caa0f40de3778cef0903ff.css " rel="stylesheet">
+<style>
+[type=radio]+label:before,[type=radio]:checked+label:after  {  visibility: hidden;  }
+/* [type=radio]:checked+label, [type=radio]:not(:checked)+label {  height: 5px; } */
+[type=checkbox]+label, [type=radio]:checked+label, [type=radio]:not(:checked)+label { padding: 15px 15px 37px 15px;}
+/* [type=radio]:not(:checked)+label { height 35px !important; } */
+</style>
 <div class="col-sm-12"><div class="panel-group"><div class="panel panel-default"><div class="panel-body"><div class="col-sm-12">
   <h3>Michigan Home Cash Offer</h3>
   <p>This is the estimated cash offer available for this home</p>
@@ -50,13 +51,93 @@ typeof b?b(this,a):a.format(this,Object.assign({},a,b))},toString:function(){var
   </div>
 </div>
 
+<div class="row">
+  <div class="col-sm-6">
+    <h5><strong>After Repair Value (ARV)</strong></h5>
+  </div>
+  <div class="col-sm-6">
+    <input name="arv" id="arv" placeholder="$100,000" onchange="maoRecalculate()" onblur="maoRecalculate()">
+  </div>
+</div>
+
+<table class="table mb-4">
+  <h3><strong>Estimated Repair Costs</strong></h3>
+  <thead>
+    <tr>
+      <th scope="col">Repair Level</th>
+      <th scope="col">
+        Small<br>
+        <span class="fw-normal">&lt;1500sqft</span>
+      </th>
+      <th scope="col">
+        Medium<br>
+        <span class="fw-normal">1500-2000sqft</span>
+      </th>
+      <th scope="col">
+        Large<br>
+        <span class="fw-normal">2000-2500sqft</span>
+      </th>
+      <th scope="col">
+        Extra Large<br>
+        <span class="fw-normal">2500+sqft</span>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th class="text-nowrap" scope="row">Light</th>
+      <td><input type="radio" class="btn-check" name="repair-costs" id="small-light" autocomplete="off" onclick="maoRecalculate()" value="10000">
+      <label class="btn btn-outline-primary" for="small-light" >$10,000</label></td>
+
+      <td><input type="radio" class="btn-check" name="repair-costs" id="medium-light" autocomplete="off" onclick="maoRecalculate()" value="20000">
+      <label class="btn btn-outline-primary" for="medium-light" >$20,000</label></td>
+
+      <td><input type="radio" class="btn-check" name="repair-costs" id="large-light" autocomplete="off" checked onclick="maoRecalculate()" value="30000">
+      <label class="btn btn-outline-primary" for="large-light" >$30,000</label></td>
+
+      <td><input type="radio" class="btn-check" name="repair-costs" id="extra-large-light" autocomplete="off" onclick="maoRecalculate()" value ="40000">
+      <label class="btn btn-outline-primary" for="extra-large-light" >$40,000</label></td>
+    </tr>
+    <tr>
+      <th class="text-nowrap" scope="row">Medium</th>
+      <td><input type="radio" class="btn-check" name="repair-costs" id="small-medium" autocomplete="off" onclick="maoRecalculate()" value ="25000">
+      <label class="btn btn-outline-primary" for="small-medium" >$25,000</label></td>
+
+      <td><input type="radio" class="btn-check" name="repair-costs" id="medium-medium" autocomplete="off" onclick="maoRecalculate()" value ="35000">
+      <label class="btn btn-outline-primary" for="medium-medium" >$35,000</label></td>
+
+      <td><input type="radio" class="btn-check" name="repair-costs" id="large-medium" autocomplete="off" onclick="maoRecalculate()" value ="55000">
+      <label class="btn btn-outline-primary" for="large-medium" >$55,000</label></td>
+
+      <td><input type="radio" class="btn-check" name="repair-costs" id="extra-large-medium" autocomplete="off" onclick="maoRecalculate()" value ="75000">
+      <label class="btn btn-outline-primary" for="extra-large-medium" >$75,000</label></td>
+    </tr>
+    <tr>
+      <th class="text-nowrap" scope="row">Heavy</th>
+      <td><input type="radio" class="btn-check" name="repair-costs" id="small-heavy" autocomplete="off" onclick="maoRecalculate()" value ="40000">
+      <label class="btn btn-outline-primary" for="small-heavy" >$40,000</label></td>
+
+      <td><input type="radio" class="btn-check" name="repair-costs" id="medium-heavy" autocomplete="off" onclick="maoRecalculate()" value ="60000">
+      <label class="btn btn-outline-primary" for="medium-heavy" >$60,000</label></td>
+
+      <td><input type="radio" class="btn-check" name="repair-costs" id="large-heavy" autocomplete="off" onclick="maoRecalculate()" value ="75000">
+      <label class="btn btn-outline-primary" for="large-heavy" >$75,000</label></td>
+
+      <td><input type="radio" class="btn-check" name="repair-costs" id="extra-large-heavy" autocomplete="off" onclick="maoRecalculate()" value ="100000">
+      <label class="btn btn-outline-primary" for="extra-large-heavy" >$100,000</label></td>
+    </tr>
+  </tbody>
+</table>
 
 <div class="row">
-  <div class="col-sm-6"><h5><strong>After Repair Value (ARV)</strong></h5></div><div class="col-sm-6"><input name="arv" id="arv" placeholder="$100,000" onchange="maoRecalculate()" onblur="maoRecalculate()"></div></div><div class="row"><div class="col-sm-6"><h5><strong>Property Rehab Estimate</strong></h5></div><div class="col-sm-6"><input  name="rehab" id="rehab" placeholder="$30,000" onchange="maoRecalculate()" onblur="maoRecalculate()" ></div></div><div class="row"><div class="col-sm-6"><h5><strong>Estimated Cash Offer</strong></h5></div><div class="col-sm-6">
-    <h4 class="flipper-mao" id="cashOffer">$ ***,***</h4></div></div>
   <div class="col-sm-6">
-    <button class="btn" onclick="location.href='https://forms.gle/uv8SZ7QEmFVjFEkK7'">Submit offer request</button>
+    <h5><strong>Estimated Cash Offer</strong></h5>
   </div>
+<div class="col-sm-6">
+  <h4 class="flipper-mao" id="cashOffer">$ ***,***</h4></div></div>
+<div class="col-sm-6">
+  <button class="btn" onclick="location.href='https://forms.gle/uv8SZ7QEmFVjFEkK7'">Submit offer request</button>
+</div>
 
 </div>
 
