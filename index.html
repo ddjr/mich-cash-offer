@@ -29,19 +29,19 @@ typeof b?b(this,a):a.format(this,Object.assign({},a,b))},toString:function(){var
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <link href="https://d2xkituyopixp9.cloudfront.net/assets/application-50f3d6f0bdda9201e456be5a4f08e4606da52cf835caa0f40de3778cef0903ff.css " rel="stylesheet">
 <style>
-[type=radio]+label:before,[type=radio]:checked+label:after  {  visibility: hidden;  }
-/* [type=radio]:checked+label, [type=radio]:not(:checked)+label {  height: 5px; } */
-[type=checkbox]+label, [type=radio]:checked+label, [type=radio]:not(:checked)+label { padding: 15px 15px 37px 15px;}
-/* [type=radio]:not(:checked)+label { height 35px !important; } */
+  [type=radio]+label:before,[type=radio]:checked+label:after  {  visibility: hidden;  }
+  [type=checkbox]+label, [type=radio]:checked+label, [type=radio]:not(:checked)+label { padding: 20px 20px 40px 20px; font-size: 30;}
+  table, td, span, button, label, input { font-size: 20; }
+  input:not([type]) {font-size: 40; padding-bottom: 5px; }
 </style>
 <div class="col-sm-12"><div class="panel-group"><div class="panel panel-default"><div class="panel-body"><div class="col-sm-12">
-  <h3>Michigan Home Cash Offer</h3>
-  <p>This is the estimated cash offer available for this home</p>
+  <h1>Michigan Home Cash Offer</h1>
+  <h4>This is the estimated cash offer available for this home</h4>
 <div class="row">
-  <div class="col-sm-6">
-    <h5><strong>Property Address</strong></h5>
+  <div class="col-sm-12">
+    <h2><strong>Property Address</strong></h2>
   </div>
-  <div class="col-sm-6">
+  <div class="col-sm12">
     <input
       id="ship-address"
       name="ship-address"
@@ -52,16 +52,16 @@ typeof b?b(this,a):a.format(this,Object.assign({},a,b))},toString:function(){var
 </div>
 
 <div class="row">
-  <div class="col-sm-6">
-    <h5><strong>After Repair Value (ARV)</strong></h5>
+  <div class="col-sm-12">
+    <h2><strong>After Repair Value (ARV)</strong></h2>
   </div>
-  <div class="col-sm-6">
+  <div class="col-sm-12">
     <input name="arv" id="arv" placeholder="$100,000" onchange="maoRecalculate()" onblur="maoRecalculate()">
   </div>
 </div>
 
 <table class="table mb-4">
-  <h3><strong>Estimated Repair Costs</strong></h3>
+  <h2><strong>Estimated Repair Costs</strong></h2>
   <thead>
     <tr>
       <th scope="col">Repair Level</th>
@@ -131,12 +131,12 @@ typeof b?b(this,a):a.format(this,Object.assign({},a,b))},toString:function(){var
 
 <div class="row">
   <div class="col-sm-6">
-    <h5><strong>Estimated Cash Offer</strong></h5>
+    <h1><strong>Estimated Cash Offer</strong></h1>
   </div>
 <div class="col-sm-6">
-  <h4 class="flipper-mao" id="cashOffer">$ ***,***</h4></div></div>
-<div class="col-sm-6">
-  <button class="btn" onclick="location.href='https://forms.gle/uv8SZ7QEmFVjFEkK7'">Submit offer request</button>
+  <h1 class="flipper-mao" id="cashOffer"><strong>$ ***,***</strong></h1></div></div>
+<div class="col-sm-12 center">
+  <button class="btn" style="font-size: 30px; padding: 20px 30px 50px 30px;" onclick="location.href='https://forms.gle/uv8SZ7QEmFVjFEkK7'">Submit offer request</button>
 </div>
 
 </div>
